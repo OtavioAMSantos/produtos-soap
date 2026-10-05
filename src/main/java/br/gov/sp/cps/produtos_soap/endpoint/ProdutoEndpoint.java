@@ -19,16 +19,30 @@ public class ProdutoEndpoint {
 
         ConsultarProdutoResponse response = new ConsultarProdutoResponse();
 
-        if (request.getCodigo() == 101) {
-            response.setNome("Fone de Ouvido Bluetooth");
-            response.setDescricao("Fone sem fio com cancelamento de ruído e bateria de 30 horas");
-            response.setMarca("JBL");
-            response.setEstoque(18);
-        } else {
-            response.setNome("Produto não encontrado");
-            response.setDescricao("-");
-            response.setMarca("-");
-            response.setEstoque(0);
+        switch (request.getCodigo()) {
+            case 101:
+                response.setNome("Fone de Ouvido Bluetooth");
+                response.setDescricao("Fone sem fio com cancelamento de ruído e bateria de 30 horas");
+                response.setMarca("JBL");
+                response.setEstoque(18);
+                break;
+            case 102:
+                response.setNome("Cafeteira Elétrica");
+                response.setDescricao("Cafeteira de 15 xícaras com filtro permanente");
+                response.setMarca("Mondial");
+                response.setEstoque(12);
+                break;
+            case 103:
+                response.setNome("Garrafa Térmica");
+                response.setDescricao("Garrafa de aço inox de 1 litro que mantém a temperatura por 12 horas");
+                response.setMarca("Termolar");
+                response.setEstoque(55);
+                break;
+            default:
+                response.setNome("Produto não encontrado");
+                response.setDescricao("-");
+                response.setMarca("-");
+                response.setEstoque(0);
         }
 
         return response;
