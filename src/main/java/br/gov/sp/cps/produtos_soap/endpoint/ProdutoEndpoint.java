@@ -7,6 +7,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import br.gov.sp.cps.produtos_soap.model.ConsultarProdutoRequest;
 import br.gov.sp.cps.produtos_soap.model.ConsultarProdutoResponse;
+import br.gov.sp.cps.produtos_soap.exception.ProdutoNaoEncontradoException;
 
 @Endpoint
 public class ProdutoEndpoint {
@@ -39,12 +40,9 @@ public class ProdutoEndpoint {
                 response.setEstoque(55);
                 break;
             default:
-                response.setNome("Produto não encontrado");
-                response.setDescricao("-");
-                response.setMarca("-");
-                response.setEstoque(0);
+                throw new ProdutoNaoEncontradoException(
+                        "Produto com código " + request.getCodigo() + " não encontrado");
         }
-
         return response;
     }
 }
